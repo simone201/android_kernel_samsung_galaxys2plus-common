@@ -1,4 +1,4 @@
-
+#
 # NOTE! Don't add files that are generated in specific
 # subdirectories here. Add them in the ".gitignore" file
 # in that subdirectory instead.
@@ -6,7 +6,6 @@
 # NOTE! Please use 'git ls-files -i --exclude-standard'
 # command after changing this file, to see if there are
 # any tracked files which get ignored after the change.
-
 #
 # Normal rules
 #
@@ -15,6 +14,7 @@
 *.o.*
 *.a
 *.s
+*.S
 *.ko
 *.so
 *.so.dbg
@@ -29,10 +29,37 @@ modules.builtin
 *.gz
 *.bz2
 *.lzma
-*.xz
 *.lzo
 *.patch
 *.gcno
+*.tar
+*.zip
+*.log
+*.rej
+*.orig
+*zImage
+*Image
+boot.img
+ramdisk.cpio
+vmlinux.lds
+vmlinux
+initramfs_data.cpio
+gen_init_cpio
+mk_elfconfig
+modpost
+drivers/tty/vt/consolemap_deftbl.c
+drivers/tty/vt/defkeymap.c
+kernel/timeconst.h
+lib/crc32table.h
+lib/gen_crc32table
+scripts/basic/fixdep
+scripts/conmakehash
+scripts/kallsyms
+scripts/kconfig/conf
+scripts/kconfig/lex.zconf.c
+scripts/kconfig/zconf.hash.c
+scripts/kconfig/zconf.tab.c
+scripts/mod/elfconfig.h
 
 #
 # Top-level generic files
@@ -55,10 +82,14 @@ modules.builtin
 #
 # Generated include files
 #
+include/asm-arm
 include/config
+include/linux/autoconf.h
+include/linux/compile.h
 include/linux/version.h
+include/linux/utsrelease.h
+include/linux/bounds.h
 include/generated
-arch/*/include/generated
 
 # stgit generated dirs
 patches-*
@@ -77,10 +108,10 @@ GRTAGS
 GSYMS
 GTAGS
 
+# files for XZ compression
+arch/arm/boot/compressed/ashldi3.S
+arch/arm/boot/compressed/piggy.xzkern
+
 *.orig
 *~
-*.swp
-*.bak
-*.old
 \#*#
-
