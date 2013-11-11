@@ -178,38 +178,6 @@ static unsigned long zone_nr_lru_pages(struct zone *zone,
 	return zone_page_state(zone, NR_LRU_BASE + lru);
 }
 
-struct dentry *debug_file;
-
-static int debug_shrinker_show(struct seq_file *s, void *unused)
-{
-	struct shrinker *shrinker;
-	struct shrink_control sc;
-
-	sc.gfp_mask = -1;
-	sc.nr_to_scan = 0;
-
-	down_read(&shrinker_rwsem);
-	list_for_each_entry(shrinker, &shrinker_list, list) {
-		int num_objs;
-
-		num_objs = shrinker->shrink(shrinker, &sc);
-		seq_printf(s, "%pf %d\n", shrinker->shrink, num_objs);
-	}
-	up_read(&shrinker_rwsem);
-	return 0;
-}
-
-static int debug_shrinker_open(struct inode *inode, struct file *file)
-{
-        return single_open(file, debug_shrinker_show, inode->i_private);
-}
-
-static const struct file_operations debug_shrinker_fops = {
-        .open = debug_shrinker_open,
-        .read = seq_read,
-        .llseek = seq_lseek,
-        .release = single_release,
-};
 /*
  * Add a shrinker callback to be called from the vm
  */
